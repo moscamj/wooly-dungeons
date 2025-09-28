@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'net.minecraftforge.gradle' version '6.0.44'   // FG6 supports Gradle 8+
+    id 'maven-publish'
+}
+
+group = 'com.example.woolydungeons'
+version = '0.0.1'
+
+base {
+    archivesName = 'woolydungeons'
+}
+
+java {
+    // MC 1.20.1 runs on Java 17; build your mod with 17 bytecode.
+    toolchain { languageVersion = JavaLanguageVersion.of(17) }
+}
+
+minecraft {
+    // Official Mojang mappings for 1.20.1
+    mappings channel: 'official', version: '1.20.1'
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            args '--username', 'Dev'
+            mods { woolydungeons { source sourceSets.main } }
+        }
+        server {
+            workingDirectory project.file('run')
+            mods { woolydungeons { source sourceSets.main } }
+        }
+    }
+}
+
+repositories {
+    maven { url = 'https://maven.minecraftforge.net' }
+    mavenCentral()
+}
+
+dependencies {
+    // Forge for MC 1.20.1 (Latest)
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.9'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

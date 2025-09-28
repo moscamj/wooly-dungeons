@@ -1,0 +1,85 @@
+/*
+ * build.gradle — Forge mod skeleton for the Wooly Dungeons project.
+ *
+ * This build script is simplified from the official MDK.  It uses
+ * ForgeGradle to pull down Minecraft and Forge dependencies and
+ * configures a basic run environment.  You will still need to copy
+ * the `gradle` wrapper and wrapper scripts from an official MDK
+ * distribution as described in the README.
+ */
+
+plugins {
+    id 'java'
+    // Use ForgeGradle v5 to match Minecraft 1.20.x/1.21.x.  Newer
+    // versions may be available; consult the Forge documentation.
+    id 'net.minecraftforge.gradle' version '5.1.+'    
+}
+
+// Specify the Java toolchain.  Forge 1.21.x requires Java 21; 1.20.x
+// works with Java 17.  Adjust this value to your target version.
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+
+// Basic mod metadata.  These values should mirror those in
+// src/main/resources/META-INF/mods.toml.  You can change the
+// version string when you cut releases.
+version = '0.0.1'
+group = 'com.example.woolydungeons'
+archivesBaseName = 'woolydungeons'
+
+// Configure the Minecraft dependency and mappings.  The mappings
+// specify how Mojang’s obfuscated names are deobfuscated.  Use the
+// official mappings for simplicity.
+minecraft {
+    // Set your target game version here.  A recommended version is
+    // 1.20.1 because it is widely supported at the time of writing.
+    // If you upgrade to 1.21.x, update the dependency below as well.
+    mappings channel: 'official', version: '1.20.1'
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            args '--username', 'Dev'
+            mods {
+                woolydungeons {
+                    source sourceSets.main
+                }
+            }
+        }
+        server {
+            workingDirectory project.file('run')
+            mods {
+                woolydungeons {
+                    source sourceSets.main
+                }
+            }
+        }
+        // Additional run configurations (data, gametest) can be added
+        // here if needed.
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Forge'
+        url = 'https://maven.minecraftforge.net'
+    }
+}
+
+dependencies {
+    // Forge dependency.  Pick a Forge build matching your game
+    // version.  Here we use 47.2.0 for Minecraft 1.20.1.  See
+    // https://files.minecraftforge.net/ for other builds.
+    minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
+}
+
+// Ensure consistent UTF‑8 encoding for Java compilation.
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+// Provide run tasks for eclipse.  When you run `gradlew
+// genEclipseRuns` the configurations above will be converted into
+// Eclipse launch configurations【9580055740765†L161-L163】.

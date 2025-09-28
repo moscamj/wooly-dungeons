@@ -1,0 +1,15 @@
+/*
+ * settings.gradle — defines the root project name.  Do not edit this
+ * file unless you know what you are doing, as recommended by the
+ * Forge documentation【9580055740765†L178-L179】.
+ */
+
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+    maven { url = "https://maven.minecraftforge.net/" }
+    mavenCentral()
+  }
+}
+
+rootProject.name = "woolydungeons"

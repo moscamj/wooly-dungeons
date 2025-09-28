@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+
+license="MIT"
+showAsResourcePack=false
+clientSideOnly=false
+
+[[mods]]
+modId="woolydungeons"
+version="${file.jarVersion}"
+displayName="Wooly Dungeons"
+authors="Team Wooly"
+description='''
+A Forge mod that introduces colour‑themed portal realms.  The
+initial mvp adds a Lime realm reachable via a keystone item.  More
+content will arrive in future updates.
+'''
+
+[[dependencies.woolydungeons]]
+modId="forge"
+mandatory=true
+versionRange="[47,48)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.woolydungeons]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21]"
+ordering="NONE"
+side="BOTH"
